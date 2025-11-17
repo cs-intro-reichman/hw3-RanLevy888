@@ -25,34 +25,42 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		for (int i=0 ; i<x2 ; i++)
-		{
-		   x1++;
-		
-		}
-		return x1;
+
+		    if (x2 > 0) {
+        for (int i = 0; i < x2; i++) {
+            x1++;
+        }
+    } else {
+        for (int i = 0; i > x2; i--) {
+            x1--;
+        }
+    }
+    return x1;
+
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		for (int i=0 ; i<x2 ; i++)
-		{
-		   x1--;
-		
-		}
-		return x1;
+		 return plus(x1, -x2);
 		
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-         int g=0;
-        for (int i=0 ; i<x2 ; i++)
-		{
-		  g = plus(x1, g);
-		}
-		return g;
-		
+        int result = 0;
+    boolean negative = false;
+
+    if (x2 < 0) {
+        x2 = -x2;
+        negative = true;
+    }
+
+    for (int i = 0; i < x2; i++) {
+        result = plus(result, x1);
+    }
+
+    if (negative) result = minus(0, result);
+    return result;
 	}
 
 	// Returns x^n (for n >= 0)
@@ -68,25 +76,38 @@ public class Algebra {
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		if(x1==x2)
-		return 1;
-		int g=x1;
-		int count =0;
-		 while(g>=x2){
-			g=minus(g, x2);
-		    count++;
-		 }
-		return count;
+		 boolean negative = false;
+
+    if (x1 < 0) { x1 = -x1; negative = !negative; }
+    if (x2 < 0) { x2 = -x2; negative = !negative; }
+
+    int count = 0;
+
+    while (x1 >= x2) {
+        x1 = minus(x1, x2);
+        count++;
+    }
+
+    if (negative) count = minus(0, count);
+    return count;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		    int g=x1;
-		 while(g >= x2){
-			g=minus(g,x2);
-		    
-		 }
-		return g;
+		  boolean negative = x1 < 0;
+
+    int a = x1;
+    int b = x2;
+
+    if (a < 0) a = -a;
+    if (b < 0) b = -b;
+
+    while (a >= b) {
+        a = minus(a, b);
+    }
+
+    if (negative) a = minus(0, a);
+    return a;
 		
 	}	
 
