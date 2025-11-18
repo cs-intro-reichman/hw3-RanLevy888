@@ -28,15 +28,28 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		    String temp1 = "";
-            String temp2 = "";
-			
-			while()
+		boolean checker = false;
+		int count=0;
+		if(str1.length()!=str2.length())
+		return false;
+		    for (int i =0; i<str2.length() ; i++ ){
 
-
-
-
-		return false; 
+                    while(checker==false && count<str2.length()){
+	                   if(str2.charAt(i)==str1.charAt(count)){
+						str1 =str1.substring(0,count) + str1.substring(count+1);
+						checker=true;
+						break;
+					   }
+					   count++;
+                       
+					}
+				   if(checker==false)
+				   return false;
+				   checker=false;
+				   count=0;
+				   
+			}
+		return true; 
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
@@ -55,7 +68,16 @@ public class Anagram {
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		int count=0;
+		String neww = "";
+		int num;
+		int u =str.length();
+        while(str.length()!=0){
+			 num = (int)(Math.random()*(str.length()));
+			 neww = neww +str.charAt(num);
+			 str=str.substring(0, num) + str.substring(num+1);
+			 count++;
+		}
+		return neww;
 	}
 }
